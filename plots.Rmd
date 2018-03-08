@@ -1,22 +1,26 @@
 ---
 title: "NCEAS Food & Drink Preferences"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
 ---
 
 
-```{r setup}
+```{r setup, echo=F, message = F, warning = F}
+
+knitr::opts_chunk$set(echo = F, message = F, warning = F)
 library(tidyverse)
 ```
 
 
-```{r}
+```{r, echo=F}
 data <- read_csv("nceas_sb_food_survey.csv") %>%
   group_by(question, choice) %>%
   mutate(count = n())
-head(data)
+#head(data)
 ```
 
-```{r}
+```{r, echo=F}
 plot_func <- function(q, title){
 d <- data %>% 
   filter(question == q)
