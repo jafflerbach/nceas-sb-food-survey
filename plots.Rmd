@@ -1,0 +1,63 @@
+---
+title: "NCEAS Food & Drink Preferences"
+output: html_notebook
+---
+
+
+```{r setup}
+library(tidyverse)
+```
+
+
+```{r}
+data <- read_csv("nceas_sb_food_survey.csv") %>%
+  group_by(question, choice) %>%
+  mutate(count = n())
+head(data)
+```
+
+```{r}
+plot_func <- function(q, title){
+d <- data %>% 
+  filter(question == q)
+
+ggplot(d, aes(x = reorder(choice, count))) +
+  geom_bar() +
+  theme_minimal() +
+  coord_flip() +
+  xlab("") +
+  ylab("Votes") +
+  ggtitle(title)
+}
+
+plot_func(1, "Favorite Grab-and-Go lunch spot")
+```
+```{r}
+plot_func(2, "Favorite sit down lunch spot")
+```
+```{r}
+plot_func(3, "Favorite after work happy hour spot")
+```
+
+```{r}
+plot_func(4, "Favorite downtown dinner spot")
+```
+
+```{r}
+plot_func(5, "Favorite downtown tasting room")
+```
+
+```{r}
+plot_func(6, "Favorite brewery")
+```
+
+```{r}
+plot_func(7, "Most underrated place")
+```
+```{r}
+plot_func(8, "Most overrated place")
+```
+```{r}
+
+```
+
